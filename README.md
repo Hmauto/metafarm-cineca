@@ -2,6 +2,14 @@
 
 Automated training pipeline for MetaFarm agricultural AI on CINECA Leonardo supercomputer.
 
+## 🎯 CINECA Resource Allocation
+
+- **Project**: aih4a_metafarm
+- **Budget**: 10,000 GPU hours
+- **Monthly**: ~4,000 GPU hours
+- **Storage**: 1 TB ($WORK)
+- **Project End**: March 31, 2026
+
 ## 🚀 Quick Start
 
 ```bash
@@ -9,43 +17,41 @@ Automated training pipeline for MetaFarm agricultural AI on CINECA Leonardo supe
 git clone https://github.com/Hmauto/metafarm-cineca.git
 cd metafarm-cineca
 
-# Run everything
-./master_metafarm.sh
+# Run training (16 GPU hours per job)
+sbatch scripts/run_training.slurm
 ```
 
 ## 📁 Files
 
-| File | Purpose |
-|------|---------|
-| `setup_metafarm_cineca.sh` | Environment setup |
-| `master_metafarm.sh` | One-click automation |
-| `quickstart.sh` | Quick start wrapper |
+| File | Purpose | Cost |
+|------|---------|------|
+| `scripts/run_training.slurm` | Main training job | 16 GPU hours |
+| `setup_metafarm_cineca.sh` | Environment setup | - |
+| `master_metafarm.sh` | One-click automation | - |
+
+## 💰 Budget Tracking
+
+Each job reports its cost in the output:
+```
+Cost: 4 GPUs × 4 hours = 16 GPU hours
+```
+
+Check remaining budget:
+```bash
+saldo -b
+```
+
+## 📊 Resource Usage
+
+- **GPUs**: 4x NVIDIA A100 (full node)
+- **Time**: 4 hours per job
+- **Cost**: 16 GPU hours per job
+- **Can run**: ~625 jobs within budget
 
 ## 📚 Documentation
 
 - [METAFARM_STEP_BY_STEP.md](METAFARM_STEP_BY_STEP.md) - Detailed walkthrough
 - [METAFARM_CINECA_GUIDE.md](METAFARM_CINECA_GUIDE.md) - Full documentation
-
-## 🎯 CINECA Resources
-
-- **System**: Leonardo (4x A100 GPUs)
-- **Partition**: boost_usr_prod
-- **Docs**: https://docs.hpc.cineca.it/
-
-## ⚡ Usage
-
-```bash
-# Full automation
-./master_metafarm.sh
-
-# Test mode (30 min)
-./master_metafarm.sh --test-mode
-
-# Step by step
-./setup_metafarm_cineca.sh
-./scripts/download_datasets.sh
-sbatch scripts/run_training.slurm
-```
+- [CINECA docs](https://docs.hpc.cineca.it/hpc/leonardo.html)
 
 ---
-Created for MetaFarm agricultural AI training.
